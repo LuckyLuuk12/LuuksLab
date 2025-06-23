@@ -43,6 +43,13 @@ export const comments = sqliteTable('comments', {
     downvotes: integer('downvotes').default(0)
 });
 
+export const comment_votes = sqliteTable('comment_votes', {
+    id: text('id').primaryKey(),
+    comment_id: text('comment_id').notNull().references(() => comments.id),
+    user_id: text('user_id').notNull().references(() => user.id),
+    vote: text('vote').notNull(), // 'up' or 'down'
+});
+
 export type Session = typeof session.$inferSelect;
 
 export type User = typeof user.$inferSelect;
@@ -50,3 +57,5 @@ export type User = typeof user.$inferSelect;
 export type Post = typeof posts.$inferSelect;
 
 export type Comment = typeof comments.$inferSelect;
+
+export type CommentVote = typeof comment_votes.$inferSelect;
