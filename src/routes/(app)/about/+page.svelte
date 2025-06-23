@@ -1,8 +1,9 @@
 <main class="about">
   <h1>About Me</h1>
   <img src="/img/header.png" alt="Luuk Kablan" class="profile-img" />
-  <h2>Luuk Kablan <span class="handle">(@LuckyLuuk_)</span></h2>
+  <h2>BSc. Luuk Kablan <span class="handle">(@LuckyLuuk_)</span></h2>
 
+  
   <div class="about-section">
     <p>
       Hi! I'm Luuk Kablan, also known online as <strong>LuckyLuuk_</strong>. I'm a developer and tech enthusiast from the Netherlands, passionate about building modern web applications and experimenting with new technologies.
@@ -11,14 +12,13 @@
 
   <div class="about-section">
     <p>
-      I enjoy working with frameworks like <strong>SvelteKit</strong> and deploying projects to platforms like <strong>Cloudflare</strong> for speed and scalability. My interests include open source, web performance, and making the web more fun and accessible for everyone.
+      What I really enjoy is creating software that people can actually use directly—tools and apps with a great user experience on the front-end, and a robust, complex back-end under the hood. I love combining the best of both worlds: making web-based or app-based solutions that are intuitive and powerful, rather than just CLI tools. Seeing people benefit from something I've built is what motivates me most.
     </p>
   </div>
 
   <div class="about-section">
     <p>
-      When I'm not coding, you might find me gaming, tinkering with servers, or sharing knowledge with the community.
-    </p>
+      When I'm not coding, you might find me gaming, studying or not at all...<br> because I am also a fanatic soccer player! </p>
   </div>
 
   <h3 class="about-heading">Find me online</h3>
@@ -40,9 +40,9 @@
 <style lang="scss">
 @import '$lib/styles/global.scss';
 .about {
-  max-width: 600px;
+  max-width: 720px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 4rem;
   background: $glass-bg;
   border-radius: 1rem;
   box-shadow: $glass-shadow;
@@ -61,10 +61,10 @@
   font-size: 1rem;
 }
 .about-section {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0;
   p {
-    margin: 0;
-    font-size: 1.08rem;
+    word-break: all;
+    word-wrap: break-word;
   }
 }
 .about-heading {

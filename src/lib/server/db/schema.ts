@@ -33,8 +33,20 @@ export const posts = sqliteTable('posts', {
     view_count: integer('view_count').default(0),
 });
 
+export const comments = sqliteTable('comments', {
+    id: text('id').primaryKey(),
+    post_id: text('post_id').notNull().references(() => posts.id),
+    user_id: text('user_id').notNull().references(() => user.id),
+    content: text('content').notNull(),
+    date_created: text('date_created').default(new Date().toISOString()),
+    upvotes: integer('upvotes').default(0),
+    downvotes: integer('downvotes').default(0)
+});
+
 export type Session = typeof session.$inferSelect;
 
 export type User = typeof user.$inferSelect;
 
 export type Post = typeof posts.$inferSelect;
+
+export type Comment = typeof comments.$inferSelect;

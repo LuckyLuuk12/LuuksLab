@@ -6,7 +6,7 @@
   let interval: any;
 
   function randomChar() {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]{}<>?/\\|~`±§÷×¤¢£¥©®™✓★☆☀☁☂☃☄☯☢☣☠☮☭☾☽♠♣♥♦♪♫♬♭♯';
     return chars[Math.floor(Math.random() * chars.length)];
   }
 
@@ -15,7 +15,7 @@
   }
 
   function startObfuscate() {
-    interval = setInterval(obfuscate, 60);
+    interval = setInterval(obfuscate, 30);
   }
 
   function stopObfuscate() {
@@ -32,7 +32,6 @@
   import { onDestroy } from 'svelte';
   onDestroy(() => clearInterval(interval));
 </script>
-
 <span
   on:mouseenter={() => {
     if (revealOnHover) {
@@ -44,8 +43,20 @@
       startObfuscate();
     }
   }}
-  style="font-family: monospace; cursor: pointer; padding: 0 0.1rem;"
   role="note"
 >
-  {#each display as c}{c}{/each}
+  {#each display as c}
+    <span class="obfuscated-char">{c}</span>
+  {/each}
 </span>
+
+<style lang="scss">
+  .obfuscated-char {
+    width: 1ch;
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s;
+    &:first-of-type, &:last-of-type {
+      margin-right: 0.2rem; /* Adjust spacing for last character */
+    }
+  }
+</style>
