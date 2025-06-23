@@ -73,9 +73,9 @@
 .content {
   width: 100vw;
   min-height: 100vh;
-  padding: 5rem 10rem;
+  padding: 4rem 10rem;
   @media screen and (max-width: 1080px) {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
   }
 }
 .page {
@@ -88,6 +88,17 @@
     left: 0;
     width: calc(100%);
     z-index: 100;
+    @media screen and (max-width: 860px) {
+        .nav-link {
+            font-size: x-small !important;
+        }
+        .brand {
+            font-size: small !important;
+            img {
+                height: 1.2rem;
+            }
+        }
+    }
 }
 
 .hamburger {
@@ -224,10 +235,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-.welcome {
-  color: $text-muted;
-  font-size: 1rem;
 }
 form {
   display: inline;
