@@ -1,0 +1,65 @@
+@import 'colors';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+html {
+  background: $gradient-background;
+  color: $text;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  font-size: 16px; // Base font size
+  @media (max-width: 768px) {
+    font-size: 14px; // Smaller base font size for mobile
+  }
+}
+
+button {
+  cursor: pointer;
+  background: $primary;
+  color: $text;
+  border: none;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    // background: darken($primary, 10%); // instead darked the background without hardcoding a color
+    transform: scale(1.05);
+  }
+}
+
+p, h1, h2, h3, h4, h5, h6, small {
+  color: $text;
+}
+
+input, textarea {
+  font: inherit;
+  color: inherit;
+  background: $surface;
+  border: 1px solid $border;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.glass {
+  background: $glass-bg;
+  backdrop-filter: $glass-backdrop;
+  -webkit-backdrop-filter: $glass-backdrop;
+  border: $glass-border;
+  box-shadow: $glass-shadow;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
