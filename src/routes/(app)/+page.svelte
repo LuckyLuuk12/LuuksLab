@@ -19,9 +19,16 @@
 </script>
 
 <main>
-    <h1>Welcome to Luuk's Lab Blog</h1>
+    <h1>Welcome to my Blog</h1>
     <p class="subtitle">Latest posts, news, and experiments</p>
-
+    <br>
+    <small>
+        Here I publish short posts about my latest projects, experiments, and thoughts on various topics.<br>
+        I am neither a professional writer nor a designer, so expect rough edges and unfinished ideas.<br>
+        That together with the fact that I am not all-knowing, <i><del>Although I am very close </del></i> <i class="fa-solid fa-face-grin-tongue-wink"></i> <br> 
+        hopefully makes this a fun place to explore.<br>
+    </small>
+    <br><br>
     {#if loading}
         <p>Loading posts...</p>
     {:else if error}
