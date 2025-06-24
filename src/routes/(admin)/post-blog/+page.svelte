@@ -1,4 +1,5 @@
 <script lang="ts">
+    import PostDisplay from '$lib/components/PostDisplay.svelte';
     import type { Post } from '$lib/server/db/schema';
     import { onMount } from 'svelte';
     import { v4 as uuidv4 } from 'uuid';
@@ -92,24 +93,31 @@
     onMount(loadPosts);
 </script>
 
-<h2>{editing ? 'Edit Post' : 'New Post'}</h2>
-<form on:submit|preventDefault={submitPost}>
-    <input bind:value={form.title} placeholder="Title" required />
-    <input bind:value={form.subtitle} placeholder="Subtitle" />
-    <textarea bind:value={form.content_html} placeholder="HTML Content" rows="8" required ></textarea>
-    <input bind:value={form.summary} placeholder="Summary" />
-    <input bind:value={form.tags} placeholder="Tags (comma separated)" />
-    <label>
-      Make public:
-      <input type="checkbox" on:change={() => form.view_state = form.view_state === 'public' ? 'private' : 'public'} checked={form.view_state === 'public'} />
-    </label>
-    <button type="submit">{editing ? 'Update' : 'Create'} Post</button>
-    {#if editing}
-        <button type="button" on:click={resetForm}>Cancel</button>
-    {/if}
-</form>
+<div class="container">
+    <form on:submit|preventDefault={submitPost}>
+        <h2>{editing ? 'Edit Post' : 'New Post'}</h2>
+        <input bind:value={form.title} placeholder="Title" required />
+        <input bind:value={form.subtitle} placeholder="Subtitle" />
+        <textarea bind:value={form.content_html} placeholder="HTML Content" rows="8" required ></textarea>
+        <input bind:value={form.summary} placeholder="Summary" />
+        <input bind:value={form.tags} placeholder="Tags (comma separated)" />
+        <label>
+        Make public:
+        <input type="checkbox" on:change={() => form.view_state = form.view_state === 'public' ? 'private' : 'public'} checked={form.view_state === 'public'} />
+        </label>
+        <button type="submit">{editing ? 'Update' : 'Create'} Post</button>
+        {#if editing}
+            <button type="button" on:click={resetForm}>Cancel</button>
+        {/if}
+    </form>
+    <!-- a live preview using the  -->
+     <div class="live-preview">
+        <h2>Live Preview</h2>
+        <PostDisplay post={form} />
+    </div>
+</div>
 
-<hr />
+<hr /><br>
 
 <h2>All Posts</h2>
 <table>
@@ -137,7 +145,22 @@
     </tbody>
 </table>
 
-<style>
+<style lang="scss">
+@use '$lib/styles/colors.scss' as *;
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    & > * {
+        max-width: 50%;
+        flex: 1;
+    }
+    .live-preview {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
 form {
     display: flex;
     flex-direction: column;
@@ -150,7 +173,7 @@ table {
     border-collapse: collapse;
 }
 th, td {
-    border: 1px solid #333;
+    border: 1px solid $border;
     padding: 0.5rem;
 }
 button {

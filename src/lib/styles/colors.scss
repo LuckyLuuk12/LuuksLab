@@ -30,3 +30,6 @@ $glass-shadow: 0 8px 42px 0 rgba(75, 62, 73, 0.18);
 $gradient-background: linear-gradient(155deg, #0d0b10 0%, #0c0a22 65%, #0d0b12 100%);
 $gradient-main: linear-gradient(90deg, #b39cff 0%, #5ffcff 100%);
 $gradient-accent: linear-gradient(90deg, #ffb3e6 0%, #7fffd4 100%);
+
+$code-bg: rgba(255, 255, 255, 0.05); // Semi-transparent background for code blocks
+$code-border: 1px solid rgba(255, 255, 255, 0.1); // Soft border for code blocks

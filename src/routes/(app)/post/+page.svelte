@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
     import type { Comment, Post } from '$lib/server/db/schema';
+    import PostDisplay from '$lib/components/PostDisplay.svelte';
 
     export let data: any; // Replace with actual type if needed
 
@@ -108,7 +109,8 @@
     {:else if err}
         <p class="error">{err}</p>
     {:else if post}
-        <div class="metadata glass">
+        <PostDisplay {post} />
+        <!-- <div class="metadata glass">
             <h1>{post.title} <small>{post.subtitle ? " - " + post.subtitle : "" }</small></h1>
             <div class="meta">
                 <span>Published: {post.date_published ? new Date(post.date_published).toLocaleDateString() : 'Unknown'}</span>
@@ -117,7 +119,7 @@
                 <span>Tags: {post.tags}</span>
             </div>
         </div>
-        <div class="post-content glass"><div class="post">{@html post.content_html}</div></div>
+        <div class="post-content glass"><div class="post">{@html post.content_html}</div></div> -->
         <div class="reactions glass">
             <h3>Reactions & Comments</h3>
             {#if data?.user && !comments.some(c => c.user_id === data.user.id)}

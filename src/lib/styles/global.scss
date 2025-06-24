@@ -65,6 +65,18 @@ input, textarea {
   padding: 1rem;
 }
 
+pre {
+  background: $code-bg;
+  border: $code-border;
+  font-size: 75%;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  font-family: 'Courier New', Courier, monospace;
+}
 a {
+  color: $primary;
   text-decoration: none;
+  &:hover {
+    color: $accent;
+  }
 }
