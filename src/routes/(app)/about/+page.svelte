@@ -38,7 +38,7 @@
 </main>
 
 <style lang="scss">
-@import '$lib/styles/global.scss';
+@use '$lib/styles/colors.scss' as *;
 .about {
   max-width: 720px;
   margin: 2rem auto;

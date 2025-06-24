@@ -68,7 +68,7 @@
 </div>
 
 <style lang="scss">
-@import '$lib/styles/global.scss';
+@use '$lib/styles/colors.scss' as *;
 
 .content {
   width: 100vw;

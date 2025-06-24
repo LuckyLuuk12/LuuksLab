@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { Post } from '$lib/server/db/schema';
-    import { view } from 'drizzle-orm/sqlite-core';
     import { onMount } from 'svelte';
     import { v4 as uuidv4 } from 'uuid';
     let posts: Post[] = [];

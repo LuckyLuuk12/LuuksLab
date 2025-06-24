@@ -33,6 +33,7 @@
 		"argon2-browser": "^1.18.0",
 		"better-sqlite3": "^12.1.0",
 		"drizzle-orm": "^0.44.2",
-		"uuid": "^11.1.0"
+		"uuid": "^11.1.0",
+		"wrangler": "^4.21.1"
 	}
 }

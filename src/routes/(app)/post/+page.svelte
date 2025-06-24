@@ -172,7 +172,7 @@
 </main>
 
 <style lang="scss">
-@import '$lib/styles/global.scss';
+@use '$lib/styles/colors.scss' as *;
 
 .metadata {
   display: flex;
@@ -182,10 +182,6 @@
   padding: 0.5rem 2rem;
   h1 {
     margin-bottom: 0.5rem;
-  }
-  h2 {
-    margin-bottom: 1rem;
-    color: $text-muted;
   }
   .meta {
     font-size: 0.95rem;

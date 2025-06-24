@@ -87,7 +87,7 @@
 </main>
 
 <style lang="scss">
-@import '$lib/styles/global.scss';
+@use '$lib/styles/colors.scss' as *;
 
 .post-list {
     list-style: none;

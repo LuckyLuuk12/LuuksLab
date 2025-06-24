@@ -47,44 +47,43 @@
 
 
 <style lang="scss">
-    @import '$lib/styles/global.scss';
+@use '$lib/styles/colors.scss' as *;
 
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: fit-content;
-        gap: 2rem;
-        margin-left: 50%;
-        transform: translateX(-50%);
-    }
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: fit-content;
+    gap: 2rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
 
-    form {
-        background: $card;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-        max-width: 400px;
-        margin: auto;
-        padding: 2rem;
-        border-radius: 0.25rem;
-    }
+form {
+    background: $card;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 0.25rem;
+}
 
-    label {
-        display: flex;
-        flex-direction: column;
-    }
-    .google-login-button {
-        width: 100%;
-        background: $card;
-        padding: 2rem;
-        max-width: 400px;
-        display: inline-block;
-        text-decoration: none;
-        border-radius: 0.25rem;
-        
-    }
+label {
+    display: flex;
+    flex-direction: column;
+}
+.google-login-button {
+    width: 100%;
+    background: $card;
+    padding: 2rem;
+    max-width: 400px;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
 
 </style>

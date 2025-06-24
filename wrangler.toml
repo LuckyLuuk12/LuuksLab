@@ -5,7 +5,9 @@ compatibility_date = "2025-06-23"
 
 # site = { bucket = "./static" }
 
-
+[assets]
+binding = "ASSETS"
+directory = ".svelte-kit/cloudflare"
 
 [[d1_databases]]
 binding = "DB"
