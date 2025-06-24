@@ -12,5 +12,5 @@ directory = ".svelte-kit/cloudflare"
 [[d1_databases]]
 binding = "DB"
 database_name = "kablan_db"
-database_id = "9f574478-68a9-4227-bd02-98f629ea6147"
+database_id = "01ca3af7-978a-4258-9ad1-37ae8f060510"
 migrations_dir = "./drizzle"
