@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { date } from "drizzle-orm/mysql-core";
     import Obfuscate from "./Obfuscate.svelte";
 
     export let data;
@@ -52,6 +53,9 @@
                 </div>
                 <div class="auth">
                     {#if data?.user}
+                        {#if data?.user?.role === 'admin'}
+                            <a href="/post-blog" class="nav-link">Write Post</a>
+                        {/if}
                         <form method="post" action="?/logout">
                             <button>Logout</button>
                         </form>

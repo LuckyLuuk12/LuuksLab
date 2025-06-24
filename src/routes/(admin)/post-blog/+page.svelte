@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { formatDate } from '$lib';
     import PostDisplay from '$lib/components/PostDisplay.svelte';
     import type { Post } from '$lib/server/db/schema';
     import { onMount } from 'svelte';
@@ -133,8 +134,8 @@
         {#each posts as post}
             <tr>
                 <td>{post.title}</td>
-                <td>{post.date_published ? new Date(post.date_published).toLocaleDateString() : 'Not published'}</td>
-                <td>{isPublic(post) ? 'No' : 'Yes'}</td>
+                <td>{post.date_published ? formatDate(post.date_published) : 'Not published'}</td>
+                <td>{isPublic(post) ? 'Yes' : 'No'}</td>
                 <td>
                     <button on:click={() => editPost(post)}>Edit</button>
                     <button on:click={() => toggleHide(post)}>{isPublic(post) ? 'Hide' : 'Unhide'}</button>

@@ -106,11 +106,9 @@ import type { Post } from '$lib/server/db/schema';
     box-shadow: $glass-shadow;
     display: flex;
     flex-direction: column;
-    background: $glass-bg;
     font-size: 0.98rem;
     transition: background 0.2s, transform 0.18s cubic-bezier(0.4,0,0.2,1);
     position: relative;
-    height: 100%;
 }
 
 small {
