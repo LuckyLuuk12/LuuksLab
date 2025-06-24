@@ -10,6 +10,10 @@
             const res = await fetch('/api/posts');
             if (!res.ok) throw new Error('Failed to load posts');
             posts = await res.json();
+            if (!Array.isArray(posts)) {
+                throw new Error('Invalid posts data format');
+            }
+            posts = posts.filter(post => post.view_state == 'public'); // Filter out unpublished posts
         } catch (e) {
             error = (e as Error).message;
         } finally {
@@ -48,13 +52,20 @@
                                 {/if}
                             </div>
                             <div class="meta">
-                                <span><strong>Published:</strong> {post.date_published ? new Date(post.date_published).toLocaleDateString() : 'Unknown'}</span>
+                                <span><strong>Published:</strong> {post.date_published ? new Date(post.date_published).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                }) : 'Unknown'}</span>
                                 {#if post.last_modified}
-                                    <span><strong>Last modified:</strong> {new Date(post.last_modified).toLocaleDateString()}</span>
+                                    <span><strong>Last modified:</strong> {new Date(post.last_modified).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                    })}</span>
                                 {/if}
                                 <span><strong>Likes:</strong> {post.likes ?? 0}</span>
                                 <span><strong>Views:</strong> {post.view_count ?? 0}</span>
-                                <span><strong>Visibility:</strong> {post.view_state}</span>
                             </div>
                         </div>
                         <p class="summary">{post.summary}</p>

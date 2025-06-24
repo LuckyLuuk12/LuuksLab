@@ -3,7 +3,7 @@ main = "./.svelte-kit/cloudflare-workers/index.js"
 compatibility_flags = [ "nodejs_compat" ]
 compatibility_date = "2025-06-23"
 
-site = { bucket = "./static" }
+# site = { bucket = "./static" }
 
 
 
