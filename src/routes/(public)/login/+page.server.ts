@@ -53,10 +53,14 @@ export const load: PageServerLoad = async (event) => {
     return { user: null };
 };
 
+function normalizeUsername(username: string): string {
+    return username.trim().replace(/\s+/g, ' ');
+}
+
 export const actions: Actions = {
     login: async (event) => {
         const formData = await event.request.formData();
-        const username = formData.get('username');
+        const username = normalizeUsername((formData.get('username') as string) ?? '');
         const password = formData.get('password');
 
         if (!validateUsername(username)) {
@@ -94,7 +98,7 @@ export const actions: Actions = {
     },
     register: async (event) => {
         const formData = await event.request.formData();
-        const username = formData.get('username');
+        const username = normalizeUsername((formData.get('username') as string) ?? '');
         const password = formData.get('password');
 
         if (!validateUsername(username)) {
@@ -135,7 +139,7 @@ function validateUsername(username: unknown): username is string {
         typeof username === 'string' &&
         username.length >= 3 &&
         username.length <= 31 &&
-        /^[A-Za-z0-9_-]+$/.test(username)
+        /^[A-Za-z0-9 _-]+$/.test(username)
     );
 }
 
