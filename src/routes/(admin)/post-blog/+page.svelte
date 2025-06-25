@@ -4,6 +4,9 @@
     import type { Post } from '$lib/server/db/schema';
     import { onMount } from 'svelte';
     import { v4 as uuidv4 } from 'uuid';
+
+    export let data: any; // Replace with actual type if needed
+
     let posts: Post[] = [];
     let form: Post = {
         id: '',
@@ -32,7 +35,7 @@
         const method = editing ? 'PATCH' : 'POST';
         const body = editing
             ? { id: form.id, fields: { ...form } }
-            : { ...form, id: uuidv4(), author_id: 'admin' }; // Replace with real author_id
+            : { ...form, id: uuidv4(), author_id: data?.user?.id }; // Replace with real author_id
         await fetch('/api/posts', {
             method,
             headers: { 'Content-Type': 'application/json' },
