@@ -52,7 +52,7 @@ export async function POST(event) {
         });
         return json({ success: true });
     } catch (e) {
-        throw error(500, 'Failed to create post');
+        throw error(500, 'Failed to create post' + e);
     }
 }
 
