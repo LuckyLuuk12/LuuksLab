@@ -6,8 +6,10 @@
 </script>
 
 <main>
+    
 <!-- ...existing code... -->
 <form method='post' action='?/login' use:enhance>
+    <a href='/'><i class='fa-solid fa-user'></i> Continue as Guest</a>
     <label>
         Username
         <input name='username' />

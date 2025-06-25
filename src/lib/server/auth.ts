@@ -1,9 +1,11 @@
-import type { RequestEvent } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
 import * as table from '$lib/server/db/schema';
 import { drizzle } from '$lib/server/db';
+import * as auth from '$lib/server/auth';
+import { fail, redirect, type Actions, type RequestEvent } from '@sveltejs/kit';
+import { database } from '$lib/server/db';
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -86,3 +88,16 @@ export function deleteSessionTokenCookie(event: RequestEvent) {
 		path: '/'
 	});
 }
+
+export const actions: Actions = {
+	logout: async (event: RequestEvent<Partial<Record<string, string>>, string | null>) => {
+		if (!event.locals.session) {
+			return fail(401);
+		}
+		const db = database(event);
+		await auth.invalidateSession(await db, event.locals.session.id);
+		auth.deleteSessionTokenCookie(event);
+
+		return redirect(302, '/login');
+	},
+};

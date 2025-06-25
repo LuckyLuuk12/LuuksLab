@@ -40,6 +40,7 @@
 
 
 <style lang="scss">
+@use 'sass:color';    
 @use '$lib/styles/colors.scss' as *;
 
 .post-card {
@@ -106,7 +107,7 @@
 }
 
 .summary {
-    color: darken($secondary, 25); // Use your accent cyan for summary text
+    color: color.adjust($secondary, $lightness: -25%); // Use your accent cyan for summary text
     max-width: 75%;
     margin: 0.3rem 0 0.4rem 0;
     font-size: 0.97rem;

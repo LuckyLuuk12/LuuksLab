@@ -101,6 +101,25 @@
             await loadComments();
         }
     }
+
+    let liking = false;
+    async function likePost() {
+        if (!post) return;
+        if (!data?.user) return alert("Login to like!");
+        liking = true;
+        try {
+            const res = await fetch('/api/posts', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: post.id, like: true })
+            });
+            if (res.ok) {
+                post.likes = (post.likes ?? 0) + 1;
+            }
+        } finally {
+            liking = false;
+        }
+    }
 </script>
 
 <main>
@@ -121,7 +140,19 @@
         </div>
         <div class="post-content glass"><div class="post">{@html post.content_html}</div></div> -->
         <div class="reactions glass">
-            <h3>Reactions & Comments</h3>
+            <div class="like-row">
+                <h3>Reactions & Comments</h3>
+                <button
+                style={liking ? 'color: var(--error);' : ''}
+                    class="like-btn"
+                    aria-label="Like this post"
+                    on:click={likePost}
+                    disabled={liking}
+                >
+                    <i class="fa fa-heart"></i>
+                    <span>{post.likes ?? 0}</span>
+                </button>
+            </div>
             {#if data?.user && !comments.some(c => c.user_id === data.user.id)}
             <!-- Comment form -->
             <form on:submit|preventDefault={submitComment} class="comment-form">
@@ -175,7 +206,26 @@
 
 <style lang="scss">
 @use '$lib/styles/colors.scss' as *;
-
+.like-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.1s;
+}
+.like-btn:active {
+    transform: scale(1.2);
+}
 .metadata {
   display: flex;
   align-items: baseline;

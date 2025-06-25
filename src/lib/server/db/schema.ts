@@ -116,9 +116,25 @@ export const comment_votes = sqliteTable('comment_votes', {
     user_id: text('user_id').notNull().references(() => user.id),
     vote: text('vote').notNull(), // 'up' or 'down'
 });
+/**
+ * Ensures types compatability with this schema:
+ * ```sql
+ * CREATE TABLE post_likes (
+ * id TEXT PRIMARY KEY,
+ * post_id TEXT NOT NULL REFERENCES posts(id),
+ * user_id TEXT NOT NULL REFERENCES user(id)
+ * );
+ * ```
+ */
+export const post_likes = sqliteTable('post_likes', {
+    id: text('id').primaryKey(),
+    post_id: text('post_id').notNull().references(() => posts.id),
+    user_id: text('user_id').notNull().references(() => user.id),
+});
 
 export type Session = typeof session.$inferSelect;
 export type User = typeof user.$inferSelect;
 export type Post = typeof posts.$inferSelect;
 export type Comment = typeof comments.$inferSelect;
 export type CommentVote = typeof comment_votes.$inferSelect;
+export type PostLike = typeof post_likes.$inferSelect;
