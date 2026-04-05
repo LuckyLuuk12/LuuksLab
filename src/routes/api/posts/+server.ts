@@ -1,7 +1,7 @@
-import { json, error } from '@sveltejs/kit';
 import { database } from '$lib/server/db';
-import { and, eq } from 'drizzle-orm';
 import * as table from '$lib/server/db/schema';
+import { error, json } from '@sveltejs/kit';
+import { and, eq, sql } from 'drizzle-orm';
 
 // Optional: Admin check helper
 function requireAdmin(locals: App.Locals) {
@@ -19,10 +19,38 @@ export async function GET(event) {
     }
     try {
         const posts = await db.select().from(table.posts);
-        return json(posts);
+        const normalizedPosts = posts.map((post) => ({
+            ...post,
+            likes: normalizeInteger(post.likes),
+            view_count: normalizeInteger(post.view_count)
+        }));
+        return json(normalizedPosts);
     } catch (e) {
         throw error(500, 'Failed to fetch posts');
     }
+}
+
+function normalizeInteger(value: unknown): number {
+    if (typeof value === 'number' && Number.isFinite(value)) {
+        return value;
+    }
+
+    if (typeof value === 'string') {
+        const parsed = Number.parseInt(value, 10);
+        if (Number.isFinite(parsed)) {
+            return parsed;
+        }
+
+        const matches = value.match(/-?\d+/g);
+        if (matches && matches.length > 0) {
+            const fallback = Number.parseInt(matches[matches.length - 1], 10);
+            if (Number.isFinite(fallback)) {
+                return fallback;
+            }
+        }
+    }
+
+    return 0;
 }
 
 export async function PATCH(event) {
@@ -39,22 +67,7 @@ export async function PATCH(event) {
         throw error(400, 'Invalid JSON in request body');
     }
 
-    // If admin, allow full edit
-    if (event.locals.user?.role === 'admin') {
-        try {
-            // Exclude 'likes' from admin updates
-            const { likes, ...fields } = data.fields ?? {};
-            await db.update(table.posts)
-                .set({ ...fields, last_modified: new Date().toISOString() })
-                .where(eq(table.posts.id, data.id))
-                .run();
-            return json({ success: true });
-        } catch (e) {
-            throw error(500, 'Failed to update post');
-        }
-    }
-
-    // If not admin, only allow liking once per user
+    // Handle like action for any authenticated user (including admins)
     if (data.like === true && event.locals.user) {
         // Check if user already liked this post
         const existing = await db
@@ -76,10 +89,24 @@ export async function PATCH(event) {
             user_id: event.locals.user.id
         }).run();
         await db.update(table.posts)
-            .set({ likes: (table.posts.likes as any) + 1 })
+            .set({ likes: sql`COALESCE(${table.posts.likes}, 0) + 1` })
             .where(eq(table.posts.id, data.id))
             .run();
         return json({ success: true });
+    }
+
+    // If admin, allow full edit (excluding likes)
+    if (event.locals.user?.role === 'admin') {
+        try {
+            const { likes, ...fields } = data.fields ?? {};
+            await db.update(table.posts)
+                .set({ ...fields, last_modified: new Date().toISOString() })
+                .where(eq(table.posts.id, data.id))
+                .run();
+            return json({ success: true });
+        } catch (e) {
+            throw error(500, 'Failed to update post');
+        }
     }
 
     // Otherwise, forbidden

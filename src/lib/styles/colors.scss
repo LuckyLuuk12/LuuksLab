@@ -1,35 +1,29 @@
-// Soft, bright dark mode palette with purple/cyan accents and glassmorphism support
-$primary:   #9c66e2;   // Soft, bright purple
-$secondary: #5ffcff;   // Soft cyan
-$accent:    #ffb3e6;   // Soft pink
-$success:   #7fffd4;   // Aquamarine
-$warning:   #ffe066;   // Soft yellow
-$error:     #ff6f91;   // Soft red-pink
-$info:      #7de2fc;   // Soft sky blue
+// Soft-dark palette tuned for readability and a more professional visual tone.
+$primary: #79c0b0;
+$secondary: #8da6ff;
+$accent: #d0b079;
+$success: #83dba1;
+$warning: #e3c87a;
+$error: #e08f8a;
+$info: #7fb8de;
 
-$background: #18171c;  // Neutral, almost-black (not blue)
-$surface:    #232127;  // Neutral dark for surfaces
-$card:      #24212e;  // Slightly lighter for cards
-$text:       #f8f8ff;  // Very light for contrast
-$text-muted: #cfcfe6;  // Muted lavender
-$border:     #3d3d4d;  // Soft neutral border
+$background: #111418;
+$surface: #181d24;
+$card: #181d24;
+$text: #eef2f8;
+$text-muted: #a9b2c2;
+$border: #2f3845;
 
-// Glassmorphism variables
-$glass-bg: rgba(255, 255, 255, 0.1); // Semi-transparent white for glass effect
-// $glass-bg: linear-gradient(
-//   155deg,
-//   rgba(255, 255, 255, 0.22) 0%,
-//   rgba(255, 255, 255, 0.13) 60%,
-//   rgba(255, 255, 255, 0.18) 100%
-// ); // more neutral, glass-like background
-$glass-backdrop: blur(12px) saturate(200%);
-$glass-border: 1px solid rgba(255,255,255,0.1);
-$glass-shadow: 0 8px 42px 0 rgba(75, 62, 73, 0.18);
+// Glassmorphism is softened to avoid heavy neon look.
+$glass-bg: rgba(24, 29, 36, 0.94);
+$glass-backdrop: blur(10px) saturate(120%);
+$glass-border: 1px solid rgba(130, 150, 178, 0.2);
+$glass-shadow: 0 12px 36px rgba(3, 8, 17, 0.38);
 
-// Gradients
-$gradient-background: linear-gradient(155deg, #0d0b10 0%, #0c0a22 65%, #0d0b12 100%);
-$gradient-main: linear-gradient(90deg, #b39cff 0%, #5ffcff 100%);
-$gradient-accent: linear-gradient(90deg, #ffb3e6 0%, #7fffd4 100%);
+// Background and accent gradients.
+$gradient-background: radial-gradient(1200px 700px at 12% -10%, rgba(121, 192, 176, 0.1), transparent 58%), radial-gradient(900px 500px at 90% 0%, rgba(141, 166, 255, 0.12), transparent 54%), linear-gradient(165deg, #0d1117 0%, #101621 45%, #0e131b 100%);
+$gradient-main: linear-gradient(120deg, #79c0b0 0%, #8da6ff 100%);
+$gradient-accent: linear-gradient(120deg, #d0b079 0%, #83dba1 100%);
 
-$code-bg: rgba(255, 255, 255, 0.05); // Semi-transparent background for code blocks
-$code-border: 1px solid rgba(255, 255, 255, 0.1); // Soft border for code blocks
+$code-bg: rgba(12, 17, 24, 0.78);
+$code-border: 1px solid rgba(130, 150, 178, 0.25);

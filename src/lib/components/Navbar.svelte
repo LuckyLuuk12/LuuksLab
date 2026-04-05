@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { date } from "drizzle-orm/mysql-core";
-    import Obfuscate from "./Obfuscate.svelte";
+    import { page } from "$app/stores";
 
     export let data;
     export let showNav = true;
@@ -8,265 +7,265 @@
         {
             href: "https://github.com/LuckyLuuk12",
             icon: "fa-brands fa-github",
-            label: "GitHub"
+            label: "GitHub",
         },
         {
             href: "https://linkedin.com/in/luuk-kablan",
             icon: "fab fa-linkedin",
-            label: "LinkedIn"
+            label: "LinkedIn",
         },
         {
             href: "https://discord.com/users/463695638094282772",
             icon: "fa-brands fa-discord",
-            label: "Discord"
-        }
+            label: "Discord",
+        },
     ];
 
     let imgError = false;
+    $: navQuery = $page.url.searchParams.get("q") ?? "";
 </script>
+
 <div class="content">
     {#if showNav}
         <nav class="navbar">
-            <input type="checkbox" id="nav-toggle" class="nav-toggle" checked />
-            <label for="nav-toggle" class="hamburger" aria-label="Open navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
             <div class="nav-content">
-                <a href="/" class="brand">
-                    {#if !imgError}
-                        <img src="/img/header.png" alt="Luuk's Lab" on:error={() => (imgError = true)} />
-                    {/if}
-                    {#if imgError}
-                        <span>Luuk's Lab</span>
-                    {/if}
-                </a>
-                <a href="/about" class="nav-link">Who the <Obfuscate text="fuck"/> is this guy!?</a>
-                <div class="socials">
-                    {#each socials as social}
-                        <a href={social.href} target="_blank" rel="noopener" aria-label={social.label}>
-                            <i class={social.icon}></i>
-                        </a>
-                    {/each}
-                </div>
-                <div class="auth">
-                    {#if data?.user}
-                        {#if data?.user?.role === 'admin'}
-                            <a href="/post-blog" class="nav-link">Write Post</a>
+                <div class="nav-left">
+                    <a href="/" class="brand">
+                        {#if !imgError}
+                            <img
+                                src="/img/header.png"
+                                alt="Luuk's Lab"
+                                on:error={() => (imgError = true)}
+                            />
                         {/if}
-                        <form method="post" action="?/logout">
-                            <button>Logout</button>
-                        </form>
-                    {:else}
-                        <a href="/login" class="nav-link">Login</a>
-                    {/if}
+                        {#if imgError}
+                            <span>Luuk's Lab</span>
+                        {/if}
+                    </a>
+                    <a href="/about" class="nav-link">About</a>
+                </div>
+                <div class="nav-right">
+                    <form class="search-form" method="get" action="/">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            type="search"
+                            name="q"
+                            placeholder="Search posts, projects, or tags"
+                            value={navQuery}
+                        />
+                    </form>
+                    <div class="socials">
+                        {#each socials as social}
+                            <a
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener"
+                                aria-label={social.label}
+                            >
+                                <i class={social.icon}></i>
+                            </a>
+                        {/each}
+                    </div>
+                    <div class="auth">
+                        {#if data?.user}
+                            {#if data?.user?.role === "admin"}
+                                <a href="/post-blog" class="nav-link"
+                                    >Write Post</a
+                                >
+                            {/if}
+                            <form method="post" action="?/logout">
+                                <button class="nav-action">Logout</button>
+                            </form>
+                        {:else}
+                            <a href="/login" class="nav-link">Login</a>
+                        {/if}
+                    </div>
                 </div>
             </div>
         </nav>
     {/if}
-  <div class="page">
-    <slot />
-  </div>
+    <div class="page">
+        <slot />
+    </div>
 </div>
 
 <style lang="scss">
-@use '$lib/styles/colors.scss' as *;
+    @use "$lib/styles/colors.scss" as *;
 
-.content {
-  width: 100vw;
-  min-height: 100vh;
-  padding: 4rem 10rem;
-  @media screen and (max-width: 1080px) {
-    padding: 3rem 2rem;
-  }
-}
-.page {
-  padding: 1rem;
-}
+    .content {
+        width: 100%;
+        min-height: 100vh;
+    }
 
-.navbar {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: calc(100%);
-    z-index: 100;
+    .page {
+        padding: 1.2rem 1rem 2rem;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba($surface, 0.48);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba($border, 0.35);
+        padding: 0.7rem 1rem;
+    }
+
+    .nav-content {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 3.2rem;
+    }
+
+    .nav-left,
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .nav-right {
+        margin-left: auto;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
     @media screen and (max-width: 860px) {
-        .nav-link {
-            font-size: x-small !important;
+        .nav-content {
+            gap: 0.6rem;
         }
+
+        .nav-link,
+        .nav-action {
+            font-size: 0.9rem;
+        }
+
+        .search-form {
+            min-width: 100%;
+            order: 2;
+        }
+
+        .socials,
+        .auth {
+            order: 3;
+        }
+
         .brand {
-            font-size: small !important;
+            font-size: 1rem;
+
             img {
-                height: 1.2rem;
+                height: 1.4rem;
             }
         }
     }
-}
 
-.hamburger {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    z-index: 200;
-}
-.hamburger span {
-    display: block;
-    height: 0.3rem;
-    width: 100%;
-    background: $primary;
-    border-radius: 0.2rem;
-    transition: 0.3s;
-}
-// Hamburger animation when toggled
-.nav-toggle:checked + .hamburger span:nth-child(1) {
-    background: $error;
-    transform: translateY(0.85rem) rotate(45deg);
-}
-.nav-toggle:checked + .hamburger span:nth-child(2) {
-    opacity: 0;
-}
-.nav-toggle:checked + .hamburger span:nth-child(3) {
-    background: $error;
-    transform: translateY(-0.85rem) rotate(-45deg);
-}
-
-// Hamburger default (reset)
-.hamburger span:nth-child(1),
-.hamburger span:nth-child(3) {
-    transition: transform 0.3s, background 0.3s;
-}
-.hamburger span:nth-child(2) {
-    transition: opacity 0.3s;
-}
-
-
-.nav-toggle {
-    display: none;
-}
-.nav-content {
-    top: 0;
-    left: 0;
-    background: $glass-bg;
-    border-bottom: $glass-border;
-    box-shadow: $glass-shadow;
-    backdrop-filter: $glass-backdrop;
-    -webkit-backdrop-filter: $glass-backdrop;
-    visibility: hidden;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    padding: 1rem 2rem 1rem 5rem;
-    height: 4rem;
-    z-index: 150;
-    border-radius: 0.25rem;
-}
-.nav-toggle:checked ~ .nav-content {
-    // transform: translateY(0);
-    visibility: visible;
-}
-.brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: $primary;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.brand img {
-    height: 2.2rem;
-    width: auto;
-    border-radius: 0.4rem;
-}
-.nav-link, button {
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: $text;
-    text-decoration: none;
-    font-size: 1.1rem;
-    margin-right: 1.5rem;
-    transition: color 0.2s;
-    position: relative;
-    overflow: hidden;
-
-    // Custom animated underline
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-        width: 100%;
-        height: 2px;
-        background: $accent;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-        border-radius: 2px;
+    .brand {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: $primary;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .brand img {
+        height: 1.8rem;
+        width: auto;
+        border-radius: 0.4rem;
     }
 
-    &:hover,
-    &:focus {
-        color: $accent;
+    .nav-link,
+    .nav-action {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: $text;
+        text-decoration: none;
+        font-size: 0.98rem;
+        margin-right: 0.2rem;
+        transition: color 0.2s;
+        position: relative;
+        overflow: hidden;
+
         &::after {
-            transform: scaleX(1);
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            height: 2px;
+            background: $gradient-accent;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+        }
+
+        &:hover,
+        &:focus {
+            color: $accent;
+            &::after {
+                transform: scaleX(1);
+            }
         }
     }
-}
 
-.socials {
-  display: flex;
-  gap: 2rem;
-}
-.socials a {
-  color: $text;
-  font-size: 1.5rem;
-  transition: color 0.2s;
-}
-.socials a:hover i {
-  color: $accent;
-}
-.auth {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-form {
-  display: inline;
-}
-// button {
-//   background: $primary;
-//   color: #fff;
-//   border: none;
-//   border-radius: 0.5rem;
-//   padding: 0.4rem 1rem;
-//   cursor: pointer;
-//   transition: background 0.2s;
-// }
-// button:hover {
-//   background: $accent;
-// }
-// @media (min-width: 700px) {
-//     .hamburger {
-//         position: absolute;
-//     }
-//     .nav-content {
-//         position: static;
-//         transform: none !important;
-//         width: 100%;
-//         justify-content: flex-start;
-//     }
-//     .nav-toggle:not(:checked) ~ .nav-content {
-//         display: flex;
-//     }
-// }
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        min-width: 250px;
+        background: rgba($surface, 0.78);
+        border: 1px solid rgba($border, 0.82);
+        border-radius: 999px;
+        padding: 0.35rem 0.65rem;
+
+        i {
+            font-size: 0.85rem;
+            color: $text-muted;
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+            font-size: 0.9rem;
+        }
+    }
+
+    .socials {
+        display: flex;
+        gap: 0.9rem;
+    }
+
+    .socials a {
+        color: $text;
+        font-size: 1.1rem;
+        transition: color 0.2s;
+        padding: 0.15rem;
+    }
+
+    .socials a:hover i {
+        color: $accent;
+    }
+
+    .auth {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+    }
+
+    form {
+        display: inline;
+    }
 </style>

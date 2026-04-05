@@ -3,22 +3,28 @@
   <img src="/img/header.png" alt="Luuk Kablan" class="profile-img" />
   <h2>BSc. Luuk Kablan <span class="handle">(@LuckyLuuk_)</span></h2>
 
-  
   <div class="about-section">
     <p>
-      Hi! I'm Luuk Kablan, also known online as <strong>LuckyLuuk_</strong>. I'm a developer and tech enthusiast from the Netherlands, passionate about building modern web applications and experimenting with new technologies.
+      Hi, I am Luuk Kablan, also known online as <strong>LuckyLuuk_</strong>. I
+      am a software developer from the Netherlands focused on building modern,
+      reliable web applications.
     </p>
   </div>
 
   <div class="about-section">
     <p>
-      What I really enjoy is creating software that people can actually use directly—tools and apps with a great user experience on the front-end, and a robust, complex back-end under the hood. I love combining the best of both worlds: making web-based or app-based solutions that are intuitive and powerful, rather than just CLI tools. Seeing people benefit from something I've built is what motivates me most.
+      I enjoy combining thoughtful frontend experiences with robust backend
+      systems, turning ideas into products that are both intuitive and
+      technically solid. Practical impact and maintainability are central to how
+      I design and ship software.
     </p>
   </div>
 
   <div class="about-section">
     <p>
-      When I'm not coding, you might find me gaming, studying or not at all...<br> because I am also a fanatic soccer player! </p>
+      Outside software, I spend time gaming, studying, and playing football.
+      Those activities keep me curious, disciplined, and collaborative.
+    </p>
   </div>
 
   <h3 class="about-heading">Find me online</h3>
@@ -29,8 +35,12 @@
       </a>
     </li>
     <li>
-      <a href="https://twitter.com/LuckyLuuk_" target="_blank" rel="noopener">
-        <i class="fab fa-reddit"></i> Reddit
+      <a
+        href="https://linkedin.com/in/luuk-kablan"
+        target="_blank"
+        rel="noopener"
+      >
+        <i class="fab fa-linkedin"></i> LinkedIn
       </a>
     </li>
     <!-- Add more socials as needed -->
@@ -38,63 +48,72 @@
 </main>
 
 <style lang="scss">
-@use '$lib/styles/colors.scss' as *;
-.about {
-  max-width: 720px;
-  margin: 2rem auto;
-  padding: 4rem;
-  background: $glass-bg;
-  border-radius: 1rem;
-  box-shadow: $glass-shadow;
-  text-align: center;
-}
-.profile-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-  object-fit: cover;
-  background: #222;
-}
-.handle {
-  color: $accent;
-  font-size: 1rem;
-}
-.about-section {
-  margin: 0 0 0.5rem 0;
-  p {
-    word-break: all;
-    word-wrap: break-word;
+  @use "$lib/styles/colors.scss" as *;
+  .about {
+    max-width: 760px;
+    margin: 1.5rem auto;
+    padding: clamp(1.2rem, 4vw, 2.2rem);
+    background: $glass-bg;
+    border-radius: 1.1rem;
+    box-shadow: $glass-shadow;
+    text-align: center;
+    border: 1px solid rgba($border, 0.75);
   }
-}
-.about-heading {
-  margin-top: 0.5rem;
-  margin-bottom: 1.2rem;
-  font-size: 1.3rem;
-  color: $primary;
-  letter-spacing: 0.03em;
-}
-.socials {
-  list-style: none;
-  padding: 0;
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  li a {
+  .profile-img {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    margin: 0.55rem auto 1rem;
+    object-fit: cover;
+    background: $surface;
+    border: 2px solid rgba($primary, 0.55);
+  }
+  .handle {
+    color: $text-muted;
+    font-size: 0.95rem;
+  }
+  .about-section {
+    margin: 0 0 0.6rem;
+    p {
+      color: $text-muted;
+      line-height: 1.65;
+      max-width: 62ch;
+      margin: 0 auto;
+    }
+  }
+  .about-heading {
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.15rem;
     color: $primary;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .socials {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
     display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    &:hover {
-      color: $accent;
-    }
-    i {
-      font-size: 1.3em;
+    justify-content: center;
+    gap: 1.2rem;
+    li a {
+      color: $text;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba($surface, 0.75);
+      border: 1px solid rgba($border, 0.72);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      &:hover {
+        color: $primary;
+        border-color: rgba($primary, 0.65);
+      }
+      i {
+        font-size: 1.1em;
+      }
     }
   }
-}
 </style>
