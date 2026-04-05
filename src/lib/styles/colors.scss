@@ -1,11 +1,11 @@
 // Soft-dark palette tuned for readability and a more professional visual tone.
 $primary: #79c0b0;
-$secondary: #8da6ff;
+$secondary: #8dffb5;
 $accent: #d0b079;
 $success: #83dba1;
 $warning: #e3c87a;
 $error: #e08f8a;
-$info: #7fb8de;
+$info: #7fdec2;
 
 $background: #111418;
 $surface: #181d24;
@@ -22,7 +22,7 @@ $glass-shadow: 0 12px 36px rgba(3, 8, 17, 0.38);
 
 // Background and accent gradients.
 $gradient-background: radial-gradient(1200px 700px at 12% -10%, rgba(121, 192, 176, 0.1), transparent 58%), radial-gradient(900px 500px at 90% 0%, rgba(141, 166, 255, 0.12), transparent 54%), linear-gradient(165deg, #0d1117 0%, #101621 45%, #0e131b 100%);
-$gradient-main: linear-gradient(120deg, #79c0b0 0%, #8da6ff 100%);
+$gradient-main: linear-gradient(120deg, #79c0b0 0%, #63c08d 100%);
 $gradient-accent: linear-gradient(120deg, #d0b079 0%, #83dba1 100%);
 
 $code-bg: rgba(12, 17, 24, 0.78);
